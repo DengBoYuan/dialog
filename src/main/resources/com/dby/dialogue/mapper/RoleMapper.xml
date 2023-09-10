@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dby.dialogue.mapper.RoleMapper">
+
+    <select id="selectAllRole" resultType="com.dby.dialogue.entity.RoleEntity">
+        select * from dialogue_role
+    </select>
+
+    <select id="selectRoleById" resultType="com.dby.dialogue.entity.RoleEntity">
+        select * from dialogue_role where id = #{id}
+    </select>
+
+    <insert id="insertRole">
+        insert into dialogue_role values (#{id}, #{roleName}, #{createdTime},
+            #{updatedTime}, #{deletedTime}, #{description}, #{roleType})
+    </insert>
+
+    <update id="updateRoleById">
+        update dialogue_role
+        <set>
+            <if test="roleName != null">role_name = #{roleName},</if>
+            <if test="createdTime != null">created_time = #{createdTime},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+            <if test="deletedTime != null">deleted_time = #{deletedTime},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="roleType != null">role_type = #{roleType}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="deleteRoleById">
+        update dialogue_role set deleted_time = #{deletedTime} where id = #{id}
+    </update>
+</mapper>

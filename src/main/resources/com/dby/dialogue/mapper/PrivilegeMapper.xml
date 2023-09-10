@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dby.dialogue.mapper.PrivilegeMapper">
+
+    <select id="selectAllPrivilege" resultType="com.dby.dialogue.entity.PrivilegeEntity">
+        select * from dialogue_privilege
+    </select>
+
+    <select id="selectPrivilegeById" resultType="com.dby.dialogue.entity.PrivilegeEntity">
+        select * from dialogue_privilege where id = #{id}
+    </select>
+
+    <insert id="insertPrivilege">
+        insert into dialogue_privilege values (#{id}, )
+    </insert>
+</mapper>

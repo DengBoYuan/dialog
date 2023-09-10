@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dby.dialogue.mapper.UserMapper">
+    <select id="selectAllUser" resultType="com.dby.dialogue.entity.UserEntity">
+        select * from dialogue_user where deleted_time = 0
+    </select>
+
+    <select id="selectUserById" resultType="com.dby.dialogue.entity.UserEntity">
+        select * from dialogue_user where id = #{id} and deleted_time = 0
+    </select>
+
+    <select id="selectUserByName" resultType="com.dby.dialogue.entity.UserEntity">
+        select * from dialogue_user where user_name = #{userName} and deleted_time = 0
+    </select>
+
+    <insert id="insertUser">
+        insert into dialogue_user values (#{id}, #{userName}, #{account}, #{userPassword}, #{privateKey},
+        #{userEmail}, #{userQq}, #{userWechat}, #{description}, #{isLogin}, #{lastIp}, #{province},
+            #{city}, #{address}, #{avatar}, #{roleId}, #{createdTime}, #{updatedTime}, #{deletedTime})
+    </insert>
+
+    <update id="updateUserById">
+        update dialogue_user
+        <set>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="userPassword != null">user_password = #{userPassword},</if>
+            <if test="privateKey != null">private_key = #{privateKey},</if>
+            <if test="userEmail != null">user_email = #{userEmail},</if>
+            <if test="userQq != null">user_qq = #{userQq},</if>
+            <if test="userWechat != null">user_wechat = #{userWechat},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="isLogin != null">is_login = #{isLogin},</if>
+            <if test="lastIp != null">last_ip = #{lastIp},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="updatedTime">updated_time = #{updatedTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="deleteUserById">
+        update dialogue_user set deleted_time = #{deletedTime} where id = #{id}
+    </update>
+</mapper>
