@@ -16,7 +16,7 @@ public interface UserMapper {
 
     public void insertUser(UserEntity userEntity);
 
-    public void updateUserById(UserEntity userEntity);
+    public void updateUser(UserEntity userEntity);
 
-    public void deleteUserById(UserEntity userEntity);
+    public void deleteUserById(String id);
 }

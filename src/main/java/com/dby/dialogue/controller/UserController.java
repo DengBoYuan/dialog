@@ -14,16 +14,34 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/id/{id}", method = {RequestMethod.GET})
-    @ResponseBody
+    @GetMapping("/id/{id}")
     public UserEntity getUserInfoById(@PathVariable("id") String id) {
-        System.out.println(id);
         return userService.getUserInfoById(id);
     }
 
-    @RequestMapping(value = "/all", method = {RequestMethod.GET})
-    @ResponseBody
+    @GetMapping("/all")
     public List<UserEntity> getAllUsersInfo() {
         return userService.getAllUsersInfo();
+    }
+
+    @GetMapping("/name/{name}")
+    public UserEntity getUserInfoByName(@PathVariable("name") String userName) {
+        return userService.getUserInfoByUserName(userName);
+    }
+
+    @PostMapping("/insert")
+    public void insertUser(@RequestBody UserEntity user) {
+        user = user.WrapEntity();
+        userService.insertUser(user);
+    }
+
+    @PostMapping("/update")
+    public void updateUser(@RequestBody UserEntity user) {
+        userService.updateUser(user);
+    }
+
+    @GetMapping("/delete/{id}")
+    public void deleteUserById(@PathVariable("id") String id) {
+        userService.deleteUserById(id);
     }
 }

@@ -23,4 +23,24 @@ public class UserService implements UserServiceImpl {
     public List<UserEntity> getAllUsersInfo() {
         return userMapper.selectAllUser();
     }
+
+    @Override
+    public UserEntity getUserInfoByUserName(String userName) {
+        return userMapper.selectUserByName(userName);
+    }
+
+    @Override
+    public void insertUser(UserEntity userEntity) {
+        userMapper.insertUser(userEntity);
+    }
+
+    @Override
+    public void updateUser(UserEntity userEntity) {
+        userMapper.updateUser(userEntity);
+    }
+
+    @Override
+    public void deleteUserById(String id) {
+        userMapper.deleteUserById(id);
+    }
 }

@@ -21,7 +21,7 @@
             #{city}, #{address}, #{avatar}, #{roleId}, #{createdTime}, #{updatedTime}, #{deletedTime})
     </insert>
 
-    <update id="updateUserById">
+    <update id="updateUser">
         update dialogue_user
         <set>
             <if test="userName != null">user_name = #{userName},</if>
@@ -39,12 +39,12 @@
             <if test="address != null">address = #{address},</if>
             <if test="avatar != null">avatar = #{avatar},</if>
             <if test="roleId != null">role_id = #{roleId},</if>
-            <if test="updatedTime">updated_time = #{updatedTime}</if>
+            updated_time = unix_timestamp(CURRENT_TIMESTAMP())
         </set>
         where id = #{id}
     </update>
 
     <update id="deleteUserById">
-        update dialogue_user set deleted_time = #{deletedTime} where id = #{id}
+        update dialogue_user set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
     </update>
 </mapper>

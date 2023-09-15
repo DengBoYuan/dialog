@@ -1,16 +1,14 @@
-package com.dby.dialogue.mapper;
+package com.dby.dialogue.service.Impl;
 
 import com.dby.dialogue.entity.RoleEntity;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface RoleMapper {
+public interface RoleServiceImpl {
 
-    public List<RoleEntity> selectAllRole();
+    public List<RoleEntity> getAllRole();
 
-    public RoleEntity selectRoleById(String id);
+    public RoleEntity getRoleById(String id);
 
     public void insertRole(RoleEntity roleEntity);
 

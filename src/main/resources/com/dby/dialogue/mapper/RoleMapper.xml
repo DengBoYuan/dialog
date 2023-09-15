@@ -5,11 +5,11 @@
 <mapper namespace="com.dby.dialogue.mapper.RoleMapper">
 
     <select id="selectAllRole" resultType="com.dby.dialogue.entity.RoleEntity">
-        select * from dialogue_role
+        select * from dialogue_role where deleted_time = 0
     </select>
 
     <select id="selectRoleById" resultType="com.dby.dialogue.entity.RoleEntity">
-        select * from dialogue_role where id = #{id}
+        select * from dialogue_role where id = #{id} and deleted_time = 0
     </select>
 
     <insert id="insertRole">
@@ -17,20 +17,18 @@
             #{updatedTime}, #{deletedTime}, #{description}, #{roleType})
     </insert>
 
-    <update id="updateRoleById">
+    <update id="updateRole">
         update dialogue_role
         <set>
             <if test="roleName != null">role_name = #{roleName},</if>
-            <if test="createdTime != null">created_time = #{createdTime},</if>
-            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
-            <if test="deletedTime != null">deleted_time = #{deletedTime},</if>
             <if test="description != null">description = #{description},</if>
-            <if test="roleType != null">role_type = #{roleType}</if>
+            <if test="roleType != null">role_type = #{roleType},</if>
+            updated_time = unix_timestamp(CURRENT_TIMESTAMP())
         </set>
         where id = #{id}
     </update>
 
     <update id="deleteRoleById">
-        update dialogue_role set deleted_time = #{deletedTime} where id = #{id}
+        update dialogue_role set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
     </update>
 </mapper>

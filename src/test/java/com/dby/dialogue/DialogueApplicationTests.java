@@ -13,13 +13,4 @@ import java.util.List;
 @SpringBootTest
 class DialogueApplicationTests {
 
-    @Autowired
-    RoleMapper roleMapper;
-
-    @Test void test() {
-        RoleEntity role = new RoleEntity();
-        role.setId("00001");
-        role.setDeletedTime((int) (System.currentTimeMillis() / 1000));
-        roleMapper.deleteRoleById(role);
-    }
 }
