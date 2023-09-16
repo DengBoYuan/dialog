@@ -12,5 +12,9 @@ public interface PrivilegeMapper {
 
     public PrivilegeEntity selectPrivilegeById(String id);
 
-    public void insertPrivilege(PrivilegeEntity privilegeEntity);
+    public void insertPrivilege(PrivilegeEntity privilege);
+
+    public void updatePrivilege(PrivilegeEntity privilege);
+
+    public void deletePrivilegeById(String id);
 }

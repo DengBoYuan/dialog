@@ -15,12 +15,12 @@ public class RoleController {
     RoleService roleService;
 
     @GetMapping("/all")
-    public List<RoleEntity> getAllRole() {
+    public List<RoleEntity> getAllRoleInfo() {
         return roleService.getAllRole();
     }
 
     @GetMapping("/id/{id}")
-    public RoleEntity getRoleById(@PathVariable("id") String id) {
+    public RoleEntity getRoleInfoById(@PathVariable("id") String id) {
         return roleService.getRoleById(id);
     }
 

@@ -5,14 +5,31 @@
 <mapper namespace="com.dby.dialogue.mapper.PrivilegeMapper">
 
     <select id="selectAllPrivilege" resultType="com.dby.dialogue.entity.PrivilegeEntity">
-        select * from dialogue_privilege
+        select * from dialogue_privilege where deleted_time = 0
     </select>
 
     <select id="selectPrivilegeById" resultType="com.dby.dialogue.entity.PrivilegeEntity">
-        select * from dialogue_privilege where id = #{id}
+        select * from dialogue_privilege where id = #{id} and deleted_time = 0
     </select>
 
     <insert id="insertPrivilege">
-        insert into dialogue_privilege values (#{id}, )
+        insert into dialogue_privilege values (#{id}, #{createdTime}, #{updatedTime}, #{deletedTime}, #{privilegeName},
+        #{targetTag}, #{action}, #{description})
     </insert>
+
+    <update id="updatePrivilege">
+        update dialogue_privilege
+        <set>
+            <if test="privilegeName != null">privilege_name = #{privilegeName},</if>
+            <if test="targetTag != null">target_tag = #{targetTag},</if>
+            <if test="action != null">action = #{action},</if>
+            <if test="description != null">description = #{description},</if>
+            updated_time = unix_timestamp(CURRENT_TIMESTAMP())
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="deletePrivilegeById">
+        update dialogue_privilege set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
+    </update>
 </mapper>

@@ -33,7 +33,7 @@ public class PrivilegeEntity {
             this.targetTag = "";
         }
         if (this.action == null) {
-            this.action = "";
+            this.action = "view";
         }
         if (this.description == null) {
             this.description = "";
