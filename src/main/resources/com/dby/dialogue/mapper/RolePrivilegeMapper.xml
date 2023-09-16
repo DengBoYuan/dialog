@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dby.dialogue.mapper.RolePrivilegeMapper">
+
+    <select id="getAllRolePriv" resultType="com.dby.dialogue.entity.RolePrivilegeEntity">
+        select * from dialogue_role_privilege
+    </select>
+
+    <select id="getRolePrivByRoleId" resultType="com.dby.dialogue.entity.RolePrivilegeEntity">
+        select * from dialogue_role_privilege where role_id = #{roleId}
+    </select>
+
+    <select id="getRolePrivByPrivId" resultType="com.dby.dialogue.entity.RolePrivilegeEntity">
+        select * from dialogue_role_privilege where privilege_id = #{privilegeId}
+    </select>
+
+    <insert id="insertRolePriv">
+        insert into dialogue_role_privilege values (#{roleId}, #{privilegeId})
+    </insert>
+
+    <delete id="deleteRolePriv">
+        delete from dialogue_role_privilege where role_id = #{roleId} and privilege_id = #{privilegeId}
+    </delete>
+
+</mapper>
