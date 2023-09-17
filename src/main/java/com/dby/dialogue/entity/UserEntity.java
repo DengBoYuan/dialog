@@ -25,62 +25,62 @@ public class UserEntity {
     private Integer deletedTime;
 
     public UserEntity WrapEntity() {
-        if (this.getId() == null) {
-            this.setId("");
+        if (this.id == null) {
+            this.id = "";
         }
-        if (this.getId() == null) {
-            this.setId("");
+        if (this.userName == null) {
+            this.userName = "";
         }
-        if (this.getAccount() == null) {
-            this.setAccount("");
+        if (this.account == null) {
+            this.account = "";
         }
-        if (this.getUserPassword() == null) {
-            this.setUserPassword("");
+        if (this.userPassword == null) {
+            this.userPassword = "";
         }
-        if (this.getPrivateKey() == null) {
-            this.setPrivateKey("");
+        if (this.privateKey == null) {
+            this.privateKey = "";
         }
-        if (this.getUserEmail() == null) {
-            this.setUserEmail("");
+        if (this.userEmail == null) {
+            this.userEmail = "";
         }
-        if (this.getUserQq() == null) {
-            this.setUserQq("");
+        if (this.userQq == null) {
+            this.userQq = "";
         }
-        if (this.getUserWechat() == null) {
-            this.setUserWechat("");
+        if (this.userWechat == null) {
+            this.userWechat = "";
         }
-        if (this.getDescription() == null) {
-            this.setDescription("");
+        if (this.description == null) {
+            this.description = "";
         }
-        if (this.getIsLogin() == null) {
-            this.setIsLogin(true);
+        if (this.isLogin == null) {
+            this.isLogin = true;
         }
-        if (this.getLastIp() == null) {
-            this.setLastIp("");
+        if (this.lastIp == null) {
+            this.lastIp = "";
         }
-        if (this.getProvince() == null) {
-            this.setProvince("");
+        if (this.province == null) {
+            this.province = "";
         }
-        if (this.getCity() == null) {
-            this.setCity("");
+        if (this.city == null) {
+            this.city = "";
         }
-        if (this.getAddress() == null) {
-            this.setAddress("");
+        if (this.address == null) {
+            this.address = "";
         }
-        if (this.getAvatar() == null) {
-            this.setAvatar("");
+        if (this.avatar == null) {
+            this.avatar = "";
         }
-        if (this.getRoleId() == null) {
-            this.setRoleId("");
+        if (this.roleId == null) {
+            this.roleId = "";
         }
-        if (this.getCreatedTime() == null) {
-            this.setCreatedTime((int) (System.currentTimeMillis() / 1000));
+        if (this.createdTime == null) {
+            this.createdTime = (int) (System.currentTimeMillis() / 1000);
         }
-        if (this.getUpdatedTime() == null) {
-            this.setUpdatedTime((int) (System.currentTimeMillis() / 1000));
+        if (this.updatedTime == null) {
+            this.updatedTime = (int) (System.currentTimeMillis() / 1000);
         }
-        if (this.getDeletedTime() == null) {
-            this.setDeletedTime(0);
+        if (this.deletedTime == null) {
+            this.deletedTime = 0;
         }
         return this;
     }

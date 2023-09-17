@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dby.dialogue.mapper.SessionMapper">
+
+    <select id="getAllSession" resultType="com.dby.dialogue.entity.SessionEntity">
+        select * from dialogue_session where deleted_time = 0
+    </select>
+
+    <select id="getSessionById" resultType="com.dby.dialogue.entity.SessionEntity">
+        select * from dialogue_session where id = #{id} and deleted_time = 0
+    </select>
+
+    <insert id="insertSession">
+        insert into dialogue_session values (#{id}, #{createdTime}, #{updatedTime}, #{deletedTime}, #{userId})
+    </insert>
+
+    <update id="updateSession">
+        update dialogue_session
+        <set>
+            <if test="userId != null">user_id = #{userId},</if>
+            updated_time = unix_timestamp(CURRENT_TIMESTAMP())
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="deleteSessionById">
+        update dialogue_session set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
+    </update>
+</mapper>
