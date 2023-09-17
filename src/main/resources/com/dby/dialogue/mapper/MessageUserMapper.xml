@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dby.dialogue.mapper.MessageUserMapper">
+
+    <select id="getAllMessageUser" resultType="com.dby.dialogue.entity.MessageUserEntity">
+        select * from dialogue_messaer_user where deleted_time = 0
+    </select>
+
+    <select id="getMessageUserById" resultType="com.dby.dialogue.entity.MessageUserEntity">
+        select * from dialogue_messaer_user where deleted_time = 0 and id = #{id}
+    </select>
+
+    <insert id="insertMessageUser">
+        insert into dialogue_messaer_user values (#{id}, #{createdTime}, #{updatedTime}, #{deletedTime},
+                                                  #{messageId}, #{state}, #{readTime}, #{userId})
+    </insert>
+
+    <update id="updateMessageUser">
+        update dialogue_messaer_user
+        <set>
+            <if test="messageId != null">message_id = #{messageId},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="readTime != null">read_time = #{readTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            updated_time = unix_timestamp(CURRENT_TIMESTAMP())
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="deleteMessageUser">
+        update dialogue_messaer_user set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
+    </update>
+</mapper>
