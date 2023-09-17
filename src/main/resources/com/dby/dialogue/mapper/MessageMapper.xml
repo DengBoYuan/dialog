@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dby.dialogue.mapper.MessageMapper">
+
+    <select id="getAllMessage" resultType="com.dby.dialogue.entity.MessageEntity">
+        select * from dialogue_message where deleted_time = 0
+    </select>
+
+    <select id="getMessageById" resultType="com.dby.dialogue.entity.MessageEntity">
+        select * from dialogue_message where deleted_time = 0 and id = #{id}
+    </select>
+
+    <insert id="insertMessage">
+        insert into dialogue_message values (#{id}, #{createdTime}, #{updatedTime}, #{deletedTime},
+        #{title}, #{content}, #{type}, #{attachment}, #{targetType}, #{senderId}, #{sendTime}, #{state}, #{target})
+    </insert>
+
+    <update id="updateMessage">
+        update dialogue_message
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="attachment != null">attachment = #{attachment},</if>
+            <if test="targetType != null">target_type = #{targetType},</if>
+            <if test="senderId != null">sender_id = #{senderId},</if>
+            <if test="sendTime != null">send_time = #{sendTime},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="target != null">target = #{target},</if>
+            updated_time = unix_timestamp(CURRENT_TIMESTAMP())
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="deleteMessageById">
+        update dialogue_message set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
+    </update>
+</mapper>
