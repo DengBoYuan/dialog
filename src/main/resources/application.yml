@@ -1,4 +1,12 @@
 spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    suffix: .html
+    mode: HTML
+  mvc:
+    static-path-pattern: /assets/**
   # ???????
   datasource:
     url: jdbc:mysql://localhost:3306/dialogue?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
@@ -18,6 +26,8 @@ spring:
       max-wait: 60000
       # ????
       connection-error-retry-attempts: 3
+  resources:
+    static-locations: classpath:/static
 
 # mybatis??
 mybatis:
@@ -40,3 +50,6 @@ logging:
     root: info
     # ???????
     com.dby.dialogue: warn
+
+server:
+  port: 8080

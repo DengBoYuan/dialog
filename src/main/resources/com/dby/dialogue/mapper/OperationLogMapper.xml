@@ -34,4 +34,19 @@
         update dialogue_op_log set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
     </update>
 
+    <resultMap id="operationLogMap" type="com.dby.dialogue.entity.OperationLogEntity">
+        <id property="id" column="id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedTime" column="deleted_time"/>
+        <result property="userId" column="user_id"/>
+        <result property="action" column="action"/>
+        <result property="target" column="target"/>
+        <result property="rank" column="rank"/>
+        <result property="item" column="item"/>
+
+        <association property="id" column="id">
+
+        </association>
+    </resultMap>
 </mapper>

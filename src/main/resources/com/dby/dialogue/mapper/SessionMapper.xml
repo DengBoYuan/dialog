@@ -4,12 +4,60 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dby.dialogue.mapper.SessionMapper">
 
-    <select id="getAllSession" resultType="com.dby.dialogue.entity.SessionEntity">
-        select * from dialogue_session where deleted_time = 0
+    <select id="getAllSession" resultType="com.dby.dialogue.entity.SessionEntity" resultMap="sessionMap">
+        select s.id,
+               s.created_time,
+               s.updated_time,
+               s.deleted_time,
+               s.user_id,
+               u.id uid,
+               u.user_name,
+               u.account,
+               u.user_password,
+               u.private_key,
+               u.user_email,
+               u.user_qq,
+               u.user_wechat,
+               u.description,
+               u.is_Login,
+               u.last_ip,
+               u.province,
+               u.city,
+               u.address,
+               u.avatar,
+               u.role_id,
+               u.created_time uct,
+               u.updated_time uut,
+               u.deleted_time udt
+        from dialogue_session s left join dialogue_user u on s.user_id = u.id where s.deleted_time = 0
     </select>
 
-    <select id="getSessionById" resultType="com.dby.dialogue.entity.SessionEntity">
-        select * from dialogue_session where id = #{id} and deleted_time = 0
+    <select id="getSessionById" resultType="com.dby.dialogue.entity.SessionEntity" resultMap="sessionMap">
+        select s.id,
+               s.created_time,
+               s.updated_time,
+               s.deleted_time,
+               s.user_id,
+               u.id uid,
+               u.user_name,
+               u.account,
+               u.user_password,
+               u.private_key,
+               u.user_email,
+               u.user_qq,
+               u.user_wechat,
+               u.description,
+               u.is_Login,
+               u.last_ip,
+               u.province,
+               u.city,
+               u.address,
+               u.avatar,
+               u.role_id,
+               u.created_time uct,
+               u.updated_time uut,
+               u.deleted_time udt
+        from dialogue_session s left join dialogue_user u on s.user_id = u.id where s.deleted_time = 0 and s.id = #{id}
     </select>
 
     <insert id="insertSession">
@@ -28,4 +76,34 @@
     <update id="deleteSessionById">
         update dialogue_session set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
     </update>
+
+    <resultMap id="sessionMap" type="com.dby.dialogue.entity.SessionEntity">
+        <id property="id" column="id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedTime" column="deleted_time"/>
+        <result property="userId" column="user_id"/>
+
+        <association property="user" javaType="com.dby.dialogue.entity.UserEntity">
+            <id property="id" column="uid"/>
+            <result property="userName" column="user_name"/>
+            <result property="account" column="account"/>
+            <result property="userPassword" column="user_password"/>
+            <result property="privateKey" column="private_key"/>
+            <result property="userEmail" column="user_email"/>
+            <result property="userQq" column="user_qq"/>
+            <result property="userWechat" column="user_wechat"/>
+            <result property="description" column="description"/>
+            <result property="isLogin" column="is_Login"/>
+            <result property="lastIp" column="last_ip"/>
+            <result property="province" column="province"/>
+            <result property="city" column="city"/>
+            <result property="address" column="address"/>
+            <result property="avatar" column="avatar"/>
+            <result property="roleId" column="role_id"/>
+            <result property="createdTime" column="uct"/>
+            <result property="updatedTime" column="uut"/>
+            <result property="deletedTime" column="udt"/>
+        </association>
+    </resultMap>
 </mapper>

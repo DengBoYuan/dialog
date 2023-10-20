@@ -13,6 +13,8 @@ public class SessionRecordEntity {
     private String receiverId;
     private String content;
     private String contentType;
+    private UserEntity sender;
+    private UserEntity receiver;
 
     public SessionRecordEntity wrapEntity() {
         if (this.id == null) {

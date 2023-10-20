@@ -13,6 +13,7 @@ public class OperationLogEntity {
     private String target;
     private String rank;
     private String item;
+    private UserEntity user;
 
     public OperationLogEntity wrapEntity() {
         if (this.id == null) {

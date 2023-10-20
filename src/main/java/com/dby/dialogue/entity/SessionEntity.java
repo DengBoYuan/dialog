@@ -9,6 +9,7 @@ public class SessionEntity {
     private Integer updatedTime;
     private Integer deletedTime;
     private String userId;
+    private UserEntity user;
 
     public SessionEntity wrapEntity() {
         if (this.id == null) {

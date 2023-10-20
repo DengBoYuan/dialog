@@ -23,6 +23,7 @@ public class UserEntity {
     private Integer createdTime;
     private Integer updatedTime;
     private Integer deletedTime;
+    private RoleEntity role;
 
     public UserEntity WrapEntity() {
         if (this.id == null) {
@@ -84,4 +85,6 @@ public class UserEntity {
         }
         return this;
     }
+
+
 }

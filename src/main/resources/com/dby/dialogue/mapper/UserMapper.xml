@@ -3,16 +3,91 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dby.dialogue.mapper.UserMapper">
-    <select id="selectAllUser" resultType="com.dby.dialogue.entity.UserEntity">
-        select * from dialogue_user where deleted_time = 0
+    <select id="selectAllUser" resultType="com.dby.dialogue.entity.UserEntity" resultMap="userMap">
+        select u.id,
+               u.user_name,
+               u.account,
+               u.user_password,
+               u.private_key,
+               u.user_email,
+               u.user_qq,
+               u.user_wechat,
+               u.description,
+               u.is_Login,
+               u.last_ip,
+               u.province,
+               u.city,
+               u.address,
+               u.avatar,
+               u.role_id,
+               u.created_time,
+               u.updated_time,
+               u.deleted_time,
+               r.id rid,
+               r.role_name,
+               r.created_time rct,
+               r.updated_time rut,
+               r.deleted_time rdt,
+               r.description rd,
+               r.role_type from dialogue_user u left join dialogue_role r on u.role_id = r.id where u.deleted_time = 0
     </select>
 
-    <select id="selectUserById" resultType="com.dby.dialogue.entity.UserEntity">
-        select * from dialogue_user where id = #{id} and deleted_time = 0
+    <select id="selectUserById" resultType="com.dby.dialogue.entity.UserEntity" resultMap="userMap">
+        select u.id,
+               u.user_name,
+               u.account,
+               u.user_password,
+               u.private_key,
+               u.user_email,
+               u.user_qq,
+               u.user_wechat,
+               u.description,
+               u.is_Login,
+               u.last_ip,
+               u.province,
+               u.city,
+               u.address,
+               u.avatar,
+               u.role_id,
+               u.created_time,
+               u.updated_time,
+               u.deleted_time,
+               r.id rid,
+               r.role_name,
+               r.created_time rct,
+               r.updated_time rut,
+               r.deleted_time rdt,
+               r.description rd,
+               r.role_type from dialogue_user u left join dialogue_role r on u.role_id = r.id where u.deleted_time = 0 and u.id = #{id}
     </select>
 
-    <select id="selectUserByName" resultType="com.dby.dialogue.entity.UserEntity">
-        select * from dialogue_user where user_name = #{userName} and deleted_time = 0
+    <select id="selectUserByName" resultType="com.dby.dialogue.entity.UserEntity" resultMap="userMap">
+        select u.id,
+               u.user_name,
+               u.account,
+               u.user_password,
+               u.private_key,
+               u.user_email,
+               u.user_qq,
+               u.user_wechat,
+               u.description,
+               u.is_Login,
+               u.last_ip,
+               u.province,
+               u.city,
+               u.address,
+               u.avatar,
+               u.role_id,
+               u.created_time,
+               u.updated_time,
+               u.deleted_time,
+               r.id rid,
+               r.role_name,
+               r.created_time rct,
+               r.updated_time rut,
+               r.deleted_time rdt,
+               r.description rd,
+               r.role_type from dialogue_user u left join dialogue_role r on u.role_id = r.id where u.user_name = #{userName} and u.deleted_time = 0
     </select>
 
     <insert id="insertUser">
@@ -47,4 +122,37 @@
     <update id="deleteUserById">
         update dialogue_user set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
     </update>
+
+    <resultMap id="userMap" type="com.dby.dialogue.entity.UserEntity">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="account" column="account"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="privateKey" column="private_key"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userQq" column="user_qq"/>
+        <result property="userWechat" column="user_wechat"/>
+        <result property="description" column="description"/>
+        <result property="isLogin" column="is_Login"/>
+        <result property="lastIp" column="last_ip"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="address" column="address"/>
+        <result property="avatar" column="avatar"/>
+        <result property="roleId" column="role_id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedTime" column="deleted_time"/>
+
+        <association property="role" javaType="com.dby.dialogue.entity.RoleEntity">
+            <id property="id" column="rid"/>
+            <result property="roleName" column="role_name"/>
+            <result property="createdTime" column="rct"/>
+            <result property="updatedTime" column="rut"/>
+            <result property="deletedTime" column="rdt"/>
+            <result property="description" column="rd"/>
+            <result property="roleType" column="role_type"/>
+        </association>
+
+    </resultMap>
 </mapper>

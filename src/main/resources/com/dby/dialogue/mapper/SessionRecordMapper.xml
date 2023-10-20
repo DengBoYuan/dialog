@@ -4,12 +4,106 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dby.dialogue.mapper.SessionRecordMapper">
 
-    <select id="getAllSessionRecord" resultType="com.dby.dialogue.entity.SessionRecordEntity">
-        select * from dialogue_session_record where deleted_time = 0
+    <select id="getAllSessionRecord" resultType="com.dby.dialogue.entity.SessionRecordEntity" resultMap="SessionRecordMap">
+        select sr.id,
+               sr.created_time,
+               sr.updated_time,
+               sr.deleted_time,
+               sr.session_id,
+               sr.sender_id,
+               sr.receiver_id,
+               sr.content,
+               sr.content_type,
+               s.id sid,
+               s.user_name sun,
+               s.account sac,
+               s.user_password sup,
+               s.private_key spk,
+               s.user_email sue,
+               s.user_qq suq,
+               s.user_wechat suw,
+               s.description sd,
+               s.is_Login sil,
+               s.last_ip sli,
+               s.province sp,
+               s.city sc,
+               s.address sad,
+               s.avatar sav,
+               s.role_id sri,
+               s.created_time sct,
+               s.updated_time sut,
+               s.deleted_time sdt,
+               r.id rid,
+               r.user_name run,
+               r.account rac,
+               r.user_password rup,
+               r.private_key rpk,
+               r.user_email rue,
+               r.user_qq ruq,
+               r.user_wechat ruw,
+               r.description rd,
+               r.is_Login ril,
+               r.last_ip rli,
+               r.province rp,
+               r.city rc,
+               r.address rad,
+               r.avatar rav,
+               r.role_id rri,
+               r.created_time rct,
+               r.updated_time rut,
+               r.deleted_time rdt from dialogue_session_record sr left join dialogue_user s on sr.sender_id = s.id
+        left join dialogue_user r on sr.receiver_id = r.id where sr.deleted_time = 0
     </select>
 
-    <select id="getSessionRecordById" resultType="com.dby.dialogue.entity.SessionRecordEntity">
-        select * from dialogue_session_record where deleted_time = 0 and id = #{id}
+    <select id="getSessionRecordById" resultType="com.dby.dialogue.entity.SessionRecordEntity" resultMap="SessionRecordMap">
+        select sr.id,
+               sr.created_time,
+               sr.updated_time,
+               sr.deleted_time,
+               sr.session_id,
+               sr.sender_id,
+               sr.receiver_id,
+               sr.content,
+               sr.content_type,
+               s.id sid,
+               s.user_name sun,
+               s.account sac,
+               s.user_password sup,
+               s.private_key spk,
+               s.user_email sue,
+               s.user_qq suq,
+               s.user_wechat suw,
+               s.description sd,
+               s.is_Login sil,
+               s.last_ip sli,
+               s.province sp,
+               s.city sc,
+               s.address sad,
+               s.avatar sav,
+               s.role_id sri,
+               s.created_time sct,
+               s.updated_time sut,
+               s.deleted_time sdt,
+               r.id rid,
+               r.user_name run,
+               r.account rac,
+               r.user_password rup,
+               r.private_key rpk,
+               r.user_email rue,
+               r.user_qq ruq,
+               r.user_wechat ruw,
+               r.description rd,
+               r.is_Login ril,
+               r.last_ip rli,
+               r.province rp,
+               r.city rc,
+               r.address rad,
+               r.avatar rav,
+               r.role_id rri,
+               r.created_time rct,
+               r.updated_time rut,
+               r.deleted_time rdt from dialogue_session_record sr left join dialogue_user s on sr.sender_id = s.id
+        left join dialogue_user r on sr.receiver_id = r.id where sr.deleted_time = 0 and sr.id = #{id}
     </select>
 
     <insert id="insertSessionRecord">
@@ -33,4 +127,60 @@
     <update id="deleteSessionRecord">
         update dialogue_session_record set deleted_time = unix_timestamp(CURRENT_TIMESTAMP()) where id = #{id}
     </update>
+
+    <resultMap id="SessionRecordMap" type="com.dby.dialogue.entity.SessionRecordEntity">
+        <id property="id" column="id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedTime" column="deleted_time"/>
+        <result property="sessionId" column="session_id"/>
+        <result property="senderId" column="sender_id"/>
+        <result property="receiverId" column="receiver_id"/>
+        <result property="content" column="content"/>
+        <result property="contentType" column="content_type"/>
+
+        <association property="sender" javaType="com.dby.dialogue.entity.UserEntity">
+            <id property="id" column="sid"/>
+            <result property="userName" column="sun"/>
+            <result property="account" column="sac"/>
+            <result property="userPassword" column="sup"/>
+            <result property="privateKey" column="spk"/>
+            <result property="userEmail" column="sue"/>
+            <result property="userQq" column="suq"/>
+            <result property="userWechat" column="suw"/>
+            <result property="description" column="sd"/>
+            <result property="isLogin" column="sil"/>
+            <result property="lastIp" column="sli"/>
+            <result property="province" column="sp"/>
+            <result property="city" column="sc"/>
+            <result property="address" column="sad"/>
+            <result property="avatar" column="sav"/>
+            <result property="roleId" column="sri"/>
+            <result property="createdTime" column="sct"/>
+            <result property="updatedTime" column="sut"/>
+            <result property="deletedTime" column="sdt"/>
+        </association>
+
+        <association property="receiver" javaType="com.dby.dialogue.entity.UserEntity">
+            <id property="id" column="rid"/>
+            <result property="userName" column="run"/>
+            <result property="account" column="rac"/>
+            <result property="userPassword" column="rup"/>
+            <result property="privateKey" column="rpk"/>
+            <result property="userEmail" column="rue"/>
+            <result property="userQq" column="ruq"/>
+            <result property="userWechat" column="ruw"/>
+            <result property="description" column="rd"/>
+            <result property="isLogin" column="ril"/>
+            <result property="lastIp" column="rli"/>
+            <result property="province" column="rp"/>
+            <result property="city" column="rc"/>
+            <result property="address" column="rad"/>
+            <result property="avatar" column="rav"/>
+            <result property="roleId" column="rri"/>
+            <result property="createdTime" column="rct"/>
+            <result property="updatedTime" column="rut"/>
+            <result property="deletedTime" column="rdt"/>
+        </association>
+    </resultMap>
 </mapper>
