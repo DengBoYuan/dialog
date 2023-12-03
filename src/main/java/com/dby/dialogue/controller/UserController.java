@@ -2,6 +2,8 @@ package com.dby.dialogue.controller;
 
 import com.dby.dialogue.entity.UserEntity;
 import com.dby.dialogue.service.UserService;
+import com.dby.dialogue.utils.Code;
+import com.dby.dialogue.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +22,19 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public List<UserEntity> getAllUsersInfo() {
-        return userService.getAllUsersInfo();
+    public Response getAllUsersInfo() {
+        Response response = new Response();
+
+        try {
+            response.data = userService.getAllUsersInfo();
+            response.code = 200;
+            response.msg = "请求成功";
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.code = 10001;
+            response.msg = Code.getMsg(10001);
+        }
+        return response;
     }
 
     @GetMapping("/name/{name}")
